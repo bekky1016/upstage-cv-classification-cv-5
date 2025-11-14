@@ -10,16 +10,17 @@ import pandas as pd
 from tqdm import tqdm
 
 train_dir = "../data/train/"
-balanced_dir = "../data/train_balanced/"
+balanced_dir = "../data/train_mod_balanced/"
 os.makedirs(balanced_dir, exist_ok=True)
 
 # train.csv 로드
-train_df = pd.read_csv("../data/train.csv")
+train_df = pd.read_csv("../data/train_mod.csv")
 
 # 클래스별 개수 확인
 class_counts = train_df["target"].value_counts().to_dict()
 target_per_class = 100
-augment_classes = [1, 13, 14]
+# augment_classes = [1, 13, 14]
+augment_classes = [1, 3, 4, 11, 13, 14]
 
 # 새로 저장할 balanced_df
 balanced_records = []
@@ -52,6 +53,6 @@ for cls in sorted(train_df["target"].unique()):
 
 # 새 csv 저장
 balanced_df = pd.DataFrame(balanced_records)
-balanced_df.to_csv("../data/train_balanced.csv", index=False)
-print("✅ 복제 완료: '../data/train_balanced/' 에 모든 이미지 저장됨")
-print("✅ 메타데이터 저장: '../data/train_balanced.csv'")
+balanced_df.to_csv("../data/train_mod_balanced.csv", index=False)
+print("✅ 복제 완료: '../data/train_mod_balanced/' 에 모든 이미지 저장됨")
+print("✅ 메타데이터 저장: '../data/train_mod_balanced.csv'")
